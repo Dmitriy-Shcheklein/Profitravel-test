@@ -10,12 +10,12 @@ interface InputProps {
   onChange: (value: string) => void;
   searchArray: number[];
   setPhoneNumber: (value: string) => void;
-  setNotify: (value: boolean) => void
+  showNotify: () => void
 }
 
 const Input: FC<InputProps> = (props) => {
 
-  const { mask, onChange, value, searchArray, setPhoneNumber, setNotify } = props;
+  const { mask, onChange, value, searchArray, setPhoneNumber, showNotify } = props;
 
   const { searchNumber } = useActions();
   const { numberForSearch, numberPhone } = useTypeSelector(state => state.mainReducer)
@@ -75,7 +75,7 @@ const Input: FC<InputProps> = (props) => {
           }
         </div>
         <button
-          onClick={() => setNotify(true)}
+          onClick={showNotify}
           disabled={value.length < 10}
           type='submit'
         >Добавить номер</button><br />
