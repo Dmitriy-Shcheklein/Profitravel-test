@@ -1,0 +1,99 @@
+.formWrapper {
+  margin: 5rem;
+  font-size: 2rem;
+}
+@media (max-width: 800px) {
+  .formWrapper {
+    margin: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+input {
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 2px solid grey;
+  width: 50%;
+  font-size: 2rem;
+  p
+  &:focus {
+    outline-color: dodgerblue;
+  }
+}
+
+@media (max-width: 800px) {
+  input {
+    width: 70%;
+    font-size: 1.5rem;
+  }
+}
+
+button {
+  margin: 1rem;
+  background-color: cornflowerblue;
+  border-radius: 0.5rem;
+  border: 2px solid cornflowerblue;
+  color: #ffffff;
+  height: 3rem;
+  width: 50%;
+  font-size: 2rem;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(72, 113, 189);
+    box-shadow: 0 0 1rem 0 rgb(72, 113, 189);
+  }
+  &:active {
+    box-shadow: 0 0 1.5rem 0 rgb(72, 113, 189);
+  }
+  &:disabled {
+    background-color: grey;
+    border: 2px solid grey;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  button {
+    font-size: 1rem;
+    width: 70%;
+  }
+}
+
+.errorInput {
+  border: 2px solid red;
+  &:focus {
+    outline-color: red;
+  }
+}
+
+.emptyInput {
+  border: 2px solid yellow;
+  &:focus{
+    outline-color:yellow;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  small {
+    font-size: 0.5em;
+    color: red;
+    position: absolute;
+    top: 85%;
+    left: 25%;
+  }
+}
+@media (max-width: 800px) {
+  .inputWrapper {
+    position: relative;
+    small {
+      font-size: 0.5em;
+      color: red;
+      position: absolute;
+      top: 90%;
+      left: 15%;
+    }
+  }
+}
