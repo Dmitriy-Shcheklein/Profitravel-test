@@ -17,6 +17,13 @@ const App = () => {
   const { numberForSearch } = useTypeSelector(state => state.mainReducer);
   const { addNumber } = useActions();
 
+  const showNotify = () => {
+    setNotify(true);
+    setTimeout(() => {
+      setNotify(false)
+    }, 3000)
+  }
+
   const phoneNumberChanged = (phoneNumber: string) => {
     setPhoneNumber(phoneNumber)
   }
@@ -40,7 +47,7 @@ const App = () => {
           onChange={phoneNumberChanged}
           searchArray={searchArray}
           setPhoneNumber={setPhoneNumber}
-          setNotify={setNotify}
+          showNotify={showNotify}
         />
         <div className='listWrapper'>
           {(numberForSearch !== '') && <PhoneNumberList />}
