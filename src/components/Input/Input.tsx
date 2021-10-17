@@ -10,7 +10,7 @@ interface InputProps {
   onChange: (value: string) => void;
   searchArray: number[];
   setPhoneNumber: (value: string) => void;
-  showNotify: () => void
+  showNotify: () => void;
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -18,6 +18,7 @@ const Input: FC<InputProps> = (props) => {
   const { mask, onChange, value, searchArray, setPhoneNumber, showNotify } = props;
 
   const { searchNumber, addNumberInArray } = useActions();
+
   const { numberForSearch, numberPhone } = useTypeSelector(state => state.mainReducer);
 
   const [isBlur, setIsBlur] = useState(false);
