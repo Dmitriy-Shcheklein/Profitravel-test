@@ -1,6 +1,7 @@
 export enum MainReducerActions {
   ADD_PHONE_NUMBER = 'ADD_PHONE_NUMBER',
   SEARCH_PHONE_NUMBER = 'SEARCH_PHONE_NUMBER',
+  ADD_PHONE_IN_ARRAY = 'ADD_PHONE_IN_ARRAY'
 }
 
 export interface State {
@@ -18,4 +19,9 @@ export interface SearchPhoneNumber {
   payload: string;
 }
 
-export type Actions = AddPhoneNumber | SearchPhoneNumber;
+export interface AddPhoneNumberInArray {
+  type: MainReducerActions.ADD_PHONE_IN_ARRAY;
+  payload: number;
+}
+
+export type Actions = AddPhoneNumber | SearchPhoneNumber | AddPhoneNumberInArray;
