@@ -18,13 +18,18 @@ const Input: FC<InputProps> = (props) => {
   const { mask, onChange, value, searchArray, setPhoneNumber, showNotify } = props;
 
   const { searchNumber } = useActions();
-  const { numberForSearch, numberPhone } = useTypeSelector(state => state.mainReducer)
+  const { numberForSearch, numberPhone } = useTypeSelector(state => state.mainReducer);
 
-  const [isBlur, setIsBlur] = useState(false)
+  const [isBlur, setIsBlur] = useState(false);
+  const [isNumberInBase, setIsNumberInBase] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsNumberInBase(false)
     const { value } = e.currentTarget;
     const cleanValue = value.replace(/[^\d]/g, '');
+    if (searchArray.includes(+cleanValue) && cleanValue.length === 10) {
+      setIsNumberInBase(true);
+    }
     onChange(cleanValue);
   }
 
@@ -43,8 +48,8 @@ const Input: FC<InputProps> = (props) => {
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     searchArray.push(+value);
-    setPhoneNumber('')
-    setIsBlur(false)
+    setPhoneNumber('');
+    setIsBlur(false);
     e.preventDefault()
   }
 
@@ -70,13 +75,18 @@ const Input: FC<InputProps> = (props) => {
               maxLength={13}
             /><br />
           </label><br />
-          {(isBlur && value.length < 10) &&
+          {
+            (isBlur && value.length < 10) &&
             <small>Номер должен состоять из 10-ти цифр</small>
+          }
+          {
+            isNumberInBase &&
+            <small>Номер уже есть в базе данных</small>
           }
         </div>
         <button
           onClick={showNotify}
-          disabled={value.length < 10}
+          disabled={(value.length < 10 || isNumberInBase)}
           type='submit'
         >Добавить номер</button><br />
         <label htmlFor=""><span>Введите номер телефона для поиска</span><br />

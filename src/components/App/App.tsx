@@ -33,7 +33,6 @@ const App = () => {
       return item.toString().includes(numberForSearch)
     });
     addNumber(newArr)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberForSearch])
 
