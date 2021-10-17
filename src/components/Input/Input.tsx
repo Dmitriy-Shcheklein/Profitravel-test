@@ -17,7 +17,7 @@ const Input: FC<InputProps> = (props) => {
 
   const { mask, onChange, value, searchArray, setPhoneNumber, showNotify } = props;
 
-  const { searchNumber } = useActions();
+  const { searchNumber, addNumberInArray } = useActions();
   const { numberForSearch, numberPhone } = useTypeSelector(state => state.mainReducer);
 
   const [isBlur, setIsBlur] = useState(false);
@@ -51,15 +51,13 @@ const Input: FC<InputProps> = (props) => {
   }
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    if (value[0] !== '0') {
-      searchArray.push(+value);
-      setPhoneNumber('');
-      setIsBlur(false);
-      e.preventDefault()
-    } else {
-      setIsNullForward(true);
-      e.preventDefault();
+    if (value.includes(numberForSearch)) {
+      addNumberInArray(+value)
     }
+    searchArray.push(+value);
+    setPhoneNumber('');
+    setIsBlur(false);
+    e.preventDefault()
   }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
