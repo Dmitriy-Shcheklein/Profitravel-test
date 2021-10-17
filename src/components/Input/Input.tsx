@@ -22,13 +22,17 @@ const Input: FC<InputProps> = (props) => {
 
   const [isBlur, setIsBlur] = useState(false);
   const [isNumberInBase, setIsNumberInBase] = useState(false);
+  const [isNullForward, setIsNullForward] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsNumberInBase(false)
+    setIsNumberInBase(false);
+    setIsNullForward(false);
     const { value } = e.currentTarget;
     const cleanValue = value.replace(/[^\d]/g, '');
     if (searchArray.includes(+cleanValue) && cleanValue.length === 10) {
       setIsNumberInBase(true);
+    } else if (value[0] === '0') {
+      setIsNullForward(true);
     }
     onChange(cleanValue);
   }
@@ -47,10 +51,15 @@ const Input: FC<InputProps> = (props) => {
   }
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    searchArray.push(+value);
-    setPhoneNumber('');
-    setIsBlur(false);
-    e.preventDefault()
+    if (value[0] !== '0') {
+      searchArray.push(+value);
+      setPhoneNumber('');
+      setIsBlur(false);
+      e.preventDefault()
+    } else {
+      setIsNullForward(true);
+      e.preventDefault();
+    }
   }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,10 +92,14 @@ const Input: FC<InputProps> = (props) => {
             isNumberInBase &&
             <small>Номер уже есть в базе данных</small>
           }
+          {
+            isNullForward &&
+            <small>Номер не может начинаться с нуля</small>
+          }
         </div>
         <button
           onClick={showNotify}
-          disabled={(value.length < 10 || isNumberInBase)}
+          disabled={(value.length < 10 || isNumberInBase || isNullForward)}
           type='submit'
         >Добавить номер</button><br />
         <label htmlFor=""><span>Введите номер телефона для поиска</span><br />
