@@ -15,7 +15,15 @@ const searchNumber = (searchNumberPhone: string): Actions => {
   }
 }
 
+const addNumberInArray = (phoneNumber: number) => {
+  return {
+    type: MainReducerActions.ADD_PHONE_IN_ARRAY,
+    payload: phoneNumber,
+  }
+}
+
 export {
   addNumber,
   searchNumber,
+  addNumberInArray
 }
