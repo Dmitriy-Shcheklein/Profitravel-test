@@ -19,6 +19,14 @@ export const mainReducer = (state: State = initialState, action: Actions) => {
         ...state,
         numberForSearch: action.payload
       }
+    case MainReducerActions.ADD_PHONE_IN_ARRAY:
+      return {
+        ...state,
+        numberPhone: [
+          ...state.numberPhone,
+          action.payload,
+        ]
+      }
     default:
       return state
   }
