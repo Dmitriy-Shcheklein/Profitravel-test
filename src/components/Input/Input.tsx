@@ -76,7 +76,7 @@ const Input: FC<InputProps> = (props) => {
             /><br />
           </label><br />
           {
-            (isBlur && value.length < 10) &&
+            (isBlur && (value.length < 10 && value.length > 0)) &&
             <small>Номер должен состоять из 10-ти цифр</small>
           }
           {
